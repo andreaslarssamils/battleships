@@ -75,6 +75,20 @@ class Board:
 
         return len(self.hits) == self.num_ships
 
+def player_guess(board_size):
+    """
+    Ask player for coordinates and validates the input.
+    """
+    while True:
+        try:
+            guess_row = int(input(f"Guess a row (0-{board_size - 1}): \n"))
+            guess_col = int(input(f"Guess a column (0-{board_size - 1}): \n"))
+            if 0 <= guess_row < board_size and 0 <= guess_col < board_size:
+                return (guess_row, guess_col)
+            else:
+                print(f"Invalid input. Please enter numbers between 0 and {board_size - 1}.")
+        except ValueError:
+            print("Invalid input. Please enter numbers only.")
 
 
 board = Board(5)
@@ -90,3 +104,6 @@ print("All ships sunk?", board.all_ships_sunk())
 row, col = board.ship_locations[0]
 board.check_hit(row, col)
 board.check_hit(row, col)
+
+player_guess(board.size)
+
