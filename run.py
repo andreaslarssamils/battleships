@@ -118,6 +118,17 @@ def play_battleship():
     print(f"Hit the cpu's ships to win! You have {num_ships} ships to sink.")
     print(" '💥' = Hit '❌' = Miss ")
 
+    turns = 0  # Initialize turns
+
+    while not player_board.all_ships_sunk() and not cpu_board.all_ships_sunk():
+        turns += 1
+        print(f"\nTurn {turns}:")
+        player_board.print_board()  # Print the player's board
+        cpu_board.print_board()  # Print the CPU's board without showing
+        break
+
+
+
 play_battleship()  # Start the game
 
 # board = Board(5)
