@@ -41,7 +41,18 @@ class Board:
                     break
         print("Ships placed at:", self.ship_locations) # Debugging statement to show ship locations
 
+    def check_hit(self, row, col):
+        """
+        This function checks if a guess hits a ship.
+        And returns "hit", "miss", "invalid" or "already guessed".
+        """
+        self.guesses_made.append((row, col)) # Add the guess to the list of guesses
 
-board = Board(5)  # Create a board of size 5
-board.place_ships()  # Place ships on the board
-board.print_board()  # Print the initial board
+        if (row, col) in self.ship_locations: # Check if the guess hits a ship
+            self.grid[row][col] = "💥" # Mark the hit
+
+board = Board(5)
+board.place_ships()
+board.print_board()
+board.check_hit(2, 3)
+board.print_board()
