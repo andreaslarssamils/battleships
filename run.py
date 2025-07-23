@@ -91,6 +91,19 @@ def player_guess(board_size):
             print("Invalid input. Please enter numbers only.")
 
 
+def cpu_guess(board_size, player_board_obj):
+    """
+    Generates a random guess for the CPU.
+    """
+    while True:
+        guess_row = random.randint(0, board_size - 1)
+        guess_col = random.randint(0, board_size - 1)
+        if (guess_row, guess_col) not in player_board_obj.guesses_made:
+            print(f"CPU guesses: ({guess_row}, {guess_col})")
+            return (guess_row, guess_col)
+
+
+
 board = Board(5)
 board.place_ships()
 board.print_board()
@@ -105,5 +118,8 @@ row, col = board.ship_locations[0]
 board.check_hit(row, col)
 board.check_hit(row, col)
 
-player_guess(board.size)
+# player_guess(board.size)
+
+cpu_row, cpu_col = cpu_guess(board.size, board)
+print("CPU guessed:", cpu_row, cpu_col)
 
