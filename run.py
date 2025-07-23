@@ -1,3 +1,7 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+import random # Importing the random module
+
+class Board:
+    """
+        A class representing the game board for battleship with a constructor, print_board, place_ships, check_hit, all_ships_sunk functions.
+    """
+
