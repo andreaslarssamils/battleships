@@ -42,6 +42,7 @@ class Board:
         print("Ships placed at:", self.ship_locations) # Debugging statement to show ship locations
 
     def check_hit(self, row, col):
+
         """
         This function checks if a guess hits a ship.
         And returns "hit", "miss", "invalid" or "already guessed".
@@ -49,10 +50,43 @@ class Board:
         self.guesses_made.append((row, col)) # Add the guess to the list of guesses
 
         if (row, col) in self.ship_locations: # Check if the guess hits a ship
-            self.grid[row][col] = "💥" # Mark the hit
+            if (row, col) not in self.hits:
+                self.grid[row][col] = "💥" # Mark the hit
+                self.hits.append((row, col))
+                # print(f"Hit at ({row}, {col})!")
+                if self.all_ships_sunk():
+                    #print("All ships sunk! You win!")
+                    return "All ships sunk! You win! 🎉"
+                else:
+                    # print(f"BOOOOM! Hit at ({row}, {col})!")
+                    return "Ahay! Hiiiit!! 💥"
+            else:
+                # print(f"Already guessed ({row}, {col}). Try again!")
+                return "Already guessed! Try again!"
+        else:
+            self.grid[row][col] = "❌" # Mark the miss
+            # print(f"Miss at ({row}, {col})!")
+            return "Miss! Better luck next time!"
+
+    def all_ships_sunk(self):
+        """
+        This function checks if all ships have been sunk on this board.
+        """
+
+        return len(self.hits) == self.num_ships
+
+
 
 board = Board(5)
 board.place_ships()
 board.print_board()
 board.check_hit(2, 3)
 board.print_board()
+
+for row, col in board.ship_locations:
+    board.check_hit(row, col)
+print("All ships sunk?", board.all_ships_sunk())
+
+row, col = board.ship_locations[0]
+board.check_hit(row, col)
+board.check_hit(row, col)
