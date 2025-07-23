@@ -21,5 +21,11 @@ class Board:
         """
         This function prints the game board.
         """
+        print("  " + "  ".join(str(i) for i in range(self.size))) # Print column headers
+        for i, row in enumerate(self.grid): # Print each row with row index
+            print(i, " ".join(row))
 
 
+
+board = Board(5)  # Create a board of size 5
+board.print_board()  # Print the initial board
