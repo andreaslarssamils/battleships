@@ -123,8 +123,13 @@ def play_battleship():
     while not player_board.all_ships_sunk() and not cpu_board.all_ships_sunk():
         turns += 1
         print(f"\nTurn {turns}:")
+
+        # Player's turn
+        print("Your board (cpu guess here)")
         player_board.print_board()  # Print the player's board
+        print("CPU's board (you guess here)")
         cpu_board.print_board()  # Print the CPU's board without showing
+        print(f"Cpu has {num_ships - len(cpu_board.hits)} ships left to sink.")
         break
 
 
