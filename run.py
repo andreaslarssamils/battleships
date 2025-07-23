@@ -56,17 +56,17 @@ class Board:
                 # print(f"Hit at ({row}, {col})!")
                 if self.all_ships_sunk():
                     #print("All ships sunk! You win!")
-                    return "All ships sunk! You win! 🎉"
+                    return "all_sunk"
                 else:
                     # print(f"BOOOOM! Hit at ({row}, {col})!")
-                    return "Ahay! Hiiiit!! 💥"
+                    return "hit"
             else:
                 # print(f"Already guessed ({row}, {col}). Try again!")
                 return "Already guessed! Try again!"
         else:
             self.grid[row][col] = "❌" # Mark the miss
             # print(f"Miss at ({row}, {col})!")
-            return "Miss! Better luck next time!"
+            return "miss"
 
     def all_ships_sunk(self):
         """
@@ -128,10 +128,23 @@ def play_battleship():
         print("Your board (cpu guess here)")
         player_board.print_board()  # Print the player's board
         print("CPU's board (you guess here)")
-        cpu_board.print_board()  # Print the CPU's board without showing
+        cpu_board.print_board()  # Print the CPU's board
         print(f"Cpu has {num_ships - len(cpu_board.hits)} ships left to sink.")
         break
 
+        # Cpus turn
+        print("CPU's turn to guess...")
+        cpu_row, cpu_col = cpu_guess(board_size, player_board)
+        cpu_result = player_board.check_hit(cpu_row, cpu_col)
+
+        if cpu_result == "all_sunk":
+            print(f"Cpu has sunk all your ships! Game over!")
+            player_board.print_board()
+            break
+        elif cpu_result == "hit":
+            print(f"CPU hit at ({cpu_row}, {cpu_col})!")
+        elif cpu_result == "miss":
+            print(f"CPU missed at ({cpu_row}, {cpu_col}).")
 
 
 play_battleship()  # Start the game
