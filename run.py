@@ -4,7 +4,7 @@ class Board:
     """
         A class representing the game board for battleship with a constructor, print_board, place_ships, check_hit, all_ships_sunk functions.
     """
-    def __init__(self, size):
+    def __init__(self, size, num_ships=5):
         """
         Constructor to initialize the game board with a given size and place ships randomly.
         """
@@ -12,7 +12,7 @@ class Board:
         self.grid = [] # 2D list to represent the board
         for _ in range(size): # Initialize the board with water
             self.grid.append(["🌊"] * size)
-        self.num_ships = 5 # Number of ships to place
+        self.num_ships = num_ships # Number of ships to place
         self.ship_locations = [] # List to store ship locations
         self.hits = [] # List to store hit locations
         self.guesses_made = [] # List to store guesses made by the player
@@ -102,24 +102,36 @@ def cpu_guess(board_size, player_board_obj):
             print(f"CPU guesses: ({guess_row}, {guess_col})")
             return (guess_row, guess_col)
 
+def play_battleship():
+    """
+    Main function to play the Battleship game.
+    """
+    board_size = 5  # Size of the board
+    num_ships = 5  # Number of ships
+    player_board = Board(board_size, num_ships) # Create a player board
+    cpu_board = Board(board_size, num_ships) # Create a CPU board
 
+    player_board.place_ships()  # Place ships on the player's board
+    cpu_board.place_ships()  # Place ships on the CPU's board
 
-board = Board(5)
-board.place_ships()
-board.print_board()
-board.check_hit(2, 3)
-board.print_board()
+play_battleship()  # Start the game
 
-for row, col in board.ship_locations:
-    board.check_hit(row, col)
-print("All ships sunk?", board.all_ships_sunk())
+# board = Board(5)
+# board.place_ships()
+# board.print_board()
+# board.check_hit(2, 3)
+# board.print_board()
 
-row, col = board.ship_locations[0]
-board.check_hit(row, col)
-board.check_hit(row, col)
+# for row, col in board.ship_locations:
+#     board.check_hit(row, col)
+# print("All ships sunk?", board.all_ships_sunk())
 
-# player_guess(board.size)
+# row, col = board.ship_locations[0]
+# board.check_hit(row, col)
+# board.check_hit(row, col)
 
-cpu_row, cpu_col = cpu_guess(board.size, board)
-print("CPU guessed:", cpu_row, cpu_col)
+# # player_guess(board.size)
+
+# cpu_row, cpu_col = cpu_guess(board.size, board)
+# print("CPU guessed:", cpu_row, cpu_col)
 
