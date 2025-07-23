@@ -114,6 +114,10 @@ def play_battleship():
     player_board.place_ships()  # Place ships on the player's board
     cpu_board.place_ships()  # Place ships on the CPU's board
 
+    print("Welcome to Battleship! 🎮")
+    print(f"Hit the cpu's ships to win! You have {num_ships} ships to sink.")
+    print(" '💥' = Hit '❌' = Miss ")
+
 play_battleship()  # Start the game
 
 # board = Board(5)
