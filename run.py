@@ -48,6 +48,12 @@ class Board:
         This function checks if a guess hits a ship.
         And returns "hit", "miss", "invalid" or "already guessed".
         """
+        if not (0 <= row < self.size and 0 <= col < self.size):
+            return "invalid"
+
+        if (row, col) in self.guesses_made:
+            return "already_guessed"
+
         self.guesses_made.append((row, col))
 
         if (row, col) in self.ship_locations:  # Check if the guess hits a ship
@@ -147,8 +153,8 @@ def play_battleship():
             print(f"Hit at ({player_guess_row}, {player_guess_col})!")
         elif player_result == "miss":
             print(f"Miss at ({player_guess_row}, {player_guess_col}).")
-        elif player_result == "Already guessed! Try again!":
-            print("already_guessed")
+        elif player_result == "already_guessed":
+            print("Already guessed! Try again!")
             turns -= 1
             continue
         elif player_result == "invalid":
