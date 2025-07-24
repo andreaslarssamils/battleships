@@ -170,9 +170,6 @@ def play_battleship():
             turns -= 1
             continue
 
-        if cpu_board.all_ships_sunk():
-            break
-
         # Cpus turn
 
         print("CPU's turn to guess...")
