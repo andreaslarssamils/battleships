@@ -22,7 +22,7 @@ class Board:
         """
         This function prints the game board.
         """
-        print("  " + "  ".join(str(i) for i in range(self.size)))
+        print("  " + " ".join(str(i) for i in range(self.size)))
         for i, row in enumerate(self.grid):  # Print each row with row index
             # print(i, " ".join(row))
             display_row = []
