@@ -24,7 +24,15 @@ class Board:
         """
         print("  " + "  ".join(str(i) for i in range(self.size)))
         for i, row in enumerate(self.grid):  # Print each row with row index
-            print(i, " ".join(row))
+            # print(i, " ".join(row))
+            display_row = []
+            for j, cell in enumerate(row):
+                if show_ships and (i, j) in self.ship_locations and \
+                   (i, j) not in self.hits:
+                    display_row.append("🚢")
+                else:
+                    display_row.append(cell)
+            print(i, " ".join(display_row))  # Print the row with index
 
     def place_ships(self):
         """
@@ -38,9 +46,9 @@ class Board:
                 ship_coords = (ship_row, ship_col)
                 if ship_coords not in self.ship_locations:
                     self.ship_locations.append(ship_coords)
-                    self.grid[ship_row][ship_col] = "🚢"  # Mark the ship
+                    # self.grid[ship_row][ship_col] = "🚢"  # Mark the ship
                     break
-        print("Ships placed at:", self.ship_locations)
+        # print("Ships placed at:", self.ship_locations)
 
     def check_hit(self, row, col):
 
